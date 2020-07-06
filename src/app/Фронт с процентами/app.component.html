@@ -1,0 +1,55 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Обратная связь</title>
+</head>
+<body>
+
+
+
+    <form name="myform">
+            <div id="externalLayout">
+                <canvas id="canvas" #canvasEl ></canvas>
+                <div id="mainLayout">
+                    <div class=row>
+                        <label for="name">Ваше имя:</label>
+                        <input id="name" name="name" [(ngModel)]="messageInfo.Name">
+                    </div>
+                    <div class=row>
+                        <label for="email" >Ваш Email:</label>
+                        <input id="email"  name="email" type="email" [(ngModel)]="messageInfo.Email">
+                    </div>
+                    <div class=row>
+                        <label for="phone" >Ваш телефон:</label>
+                        <input id="phone" name="phone" [(ngModel)]="messageInfo.Phone">
+                    </div>
+                    <div class=row>
+                        <label for="selectTopic">Тема:</label>
+                        <select  name="selectTopic" [(ngModel)]="messageInfo.TopicId">  
+                            <option *ngFor="let top of topics" [ngValue]="top.id"  >
+                                {{top.name}}
+                            </option> 
+                        </select>
+                    </div>
+                    <div class=row>
+                        <label for="message">Ваше сообщение:</label>
+                        <textarea name="message" rows="5" [(ngModel)]="messageInfo.Text"></textarea>
+                    </div>
+                    <div class=row>
+                        <label for="message1"></label>
+                        <button id="submitButton" type="submit" (click)="addMessage()">Отправить письмо!</button>
+                    </div>
+                </div><!--mainLayout-->
+            </div><!--externalLayout-->
+    </form>
+</body>
+
+</html>
+
+
+
+<router-outlet></router-outlet>
+

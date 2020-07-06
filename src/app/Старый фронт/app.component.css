@@ -1,0 +1,29 @@
+html, body {  font-weight: normal;
+			  font-family:  Helvetica, Verdana  , Arial, sans-serif , georgia;
+		    ; font-style: normal;
+		      font-size: 95%;
+		      padding: 0;
+		      margin: 0;
+		      display: block; 
+		      width: auto; } 
+
+
+body {width: auto; color:#444; background: #eee;} 
+
+h1 {font-size: 1.8em;line-height: 1.2em;margin: 0;padding: 0;}
+
+
+.myform {text-align: left; margin: 20px 20px 20px 20px;  background: #ccc; }
+
+.myform  h1 {margin: 10px;padding: 10px 50px  10px;}
+
+.myform form { min-width: 600px; margin: 10px 10px 10px 10px; }
+.myform .stroka{  width: auto; margin: 10px 10px 10px 10px; display: table;}
+.myform .stroka label { width: 100px;   float:left;}
+.myform .stroka input { width:250px;  padding:10px; }
+.myform .stroka select { width:260px;  padding:10px; }
+.myform .stroka textarea { width:260px;  padding:10px; }
+
+.myform .stroka-errors  label {   padding:10px; color:red; }
+.myform  .stroka button { width:250px;  margin-left:100px; margin-bottom:20px; padding:10px;  }
+

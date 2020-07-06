@@ -1,14 +1,11 @@
-html {
-	font-family: sans-serif;
-	font-size: 11pt; /*размер шрифта*/
-}
-
 body{
 	margin:0;
+	min-width: 720px;
 }
 
 #externalLayout {
-	width: 600px;
+	min-width: 400px;
+	max-width: 600px;
 	margin: 20px auto;
 }
 
@@ -30,49 +27,36 @@ body{
 	z-index : 10;
 }
 
+
 .row {
 	display: table;
 	width:100%;
 	margin-top:5px;
 }
 
-.errosRow {
-	display: table;
-	width: 346px;
-	height: 20px;
-	padding-left: 20px;
-	padding-top: 7px;
-	padding-bottom: 7px;
-	margin-left: 155px;
-	color: #992B30;
-	border-color:#F2B8BF; 
-	background-color: #F2B8BF;
-	border-radius: 5px; /*закругляем углы для остальных браузеров*/
-}
-
 .row label {
 	float:left;
-	width: 150px;
+	width: 25%;
 	height: 100%;
 	margin-left: 5px;
 }
 
-.row input, select, textarea {
-	border-radius: 5px; /*закругляем углы для остальных браузеров*/
-	font-size: 11pt; /*размер шрифта*/
-	  
-}
-
-
 .row input, select {
+	border-radius: 5px; /*закругляем углы для остальных браузеров*/  
     padding-left: 20px; /*отступ слева от ввода, чтобы текст не был на картинке(выбирать по размеру картинки)*/  
-    height: 25px; /*высота строки ввода*/   
+    height: 20px; /*высота строки ввода*/   
+	font-size: 13px; /*размер шрифта*/
 	background-position: 4px; /*Позиционируем*/	
 	background-repeat: no-repeat; /*Убираем повтор изображения*/   
 }
 
+.row input, textarea, select {
+	width: 65%;
+	margin-right:15px;
+}
+
 .row input#email {
-	background-image:url("/assets/images/email1.jpg");
+	background-image:url("/assets/images/email1.jpg");  
 }
 
 .row input#phone {
@@ -81,18 +65,6 @@ body{
 
 .row input#name {
 	background-image:url("/assets/images/people1.jpg");
-}
-
-.row input {
-	width: 340px;
-}
-
-.row select{
-	width: 366px;
-}
-
-.row textarea{
-	width: 360px;
 }
 
 #submitButton {
