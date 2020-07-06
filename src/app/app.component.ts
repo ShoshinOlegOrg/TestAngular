@@ -16,13 +16,12 @@ export class AppComponent implements AfterViewInit/*OnInit*/ {
   @ViewChild('canvasEl', {static: false}) canvasEl: ElementRef;
   /** Canvas 2d context */
   private context: CanvasRenderingContext2D;
-  
-  messageInfo: MessageInfo = new MessageInfo();
-
-  topics: Topic[];
-  selectedTopic: Topic = new Topic(-1, "");
-
   captchaField: string;
+  
+  topics: Topic[];
+  messageInfo: MessageInfo = new MessageInfo();
+  isSended: boolean = false;
+  receivedData: any;
 
   constructor(
     private dataService: DataService) {}
@@ -30,14 +29,12 @@ export class AppComponent implements AfterViewInit/*OnInit*/ {
   //ngOnInit() {
   ngAfterViewInit() {
     this.loadTopics(); // загрузка тем сообщений
-    console.log(this.messageInfo);
-
     this.context = (this.canvasEl.nativeElement as HTMLCanvasElement)
                                 .getContext('2d');
-    this.draw();
+    this.drawHeader();
   }
 
-  private draw() {
+  private drawHeader() {
     var canvas =  this.canvasEl.nativeElement as  HTMLCanvasElement;
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -69,24 +66,14 @@ export class AppComponent implements AfterViewInit/*OnInit*/ {
     this.dataService.getTopics()
         .subscribe((data: Topic[]) => {
           this.topics = data;
-          //this.selectedTopic = this.topics[1];
         });
   }
 
-  addMessage(/*name: string, email: string, phone: string, text: string*/) {
-    console.log(this.messageInfo.Name);
-    console.log(this.messageInfo.Email);
-    console.log(this.messageInfo.Phone);
-    console.log(this.messageInfo.Text);
-    //TopicId
-    console.log(this.messageInfo.TopicId);
-    console.log(this.selectedTopic);
+  addMessage() {
     this.dataService.addMessage(this.messageInfo)
-        .subscribe( data => console.log(data));
-  }
-
-  onChangeTopic(topic) {
-    console.log(topic);
-    alert(topic);
+        .subscribe( data => { 
+          this.receivedData = data;
+          this.isSended = true;
+        });
   }
 }

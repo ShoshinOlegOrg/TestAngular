@@ -2,103 +2,108 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title> Обратная связь</title>
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <title> Обратная связь</title>
+    </head>
+    <body>
+        <form name="myform" #myForm="ngForm" *ngIf="!isSended">
+                <div class="externalLayout">
+                    <canvas id="canvas" #canvasEl ></canvas>
+                    <div id="mainLayout">
+                        <div class=row>
+                            <label for="name">Ваше имя:</label>
+                            <input id="name" name="name" [(ngModel)]="messageInfo.Name" #name="ngModel" required>
+                        </div>
+                        <div class=errosRow *ngIf="name.invalid && (name.dirty || name.touched)  ">
+                            <div *ngIf="name.errors.required">
+                                Введите имя
+                            </div>
+                        </div>
+                        <div class=row>
+                            <label for="email" >Ваш Email:</label>
+                            <input id="email"  name="email" type="email" [(ngModel)]="messageInfo.Email" 
+                            #email="ngModel"
+                            required pattern="[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}" >
+                        </div>
+                        <div class=errosRow *ngIf="email.invalid && (email.dirty || email.touched)">
+                            <div *ngIf="email.errors.pattern">
+                                Некорректный email
+                            </div>
+                            <div *ngIf="email.errors.required">
+                                Введите email
+                            </div>
+                        </div>
+                        <div class=row>
+                            <label for="phone" >Ваш телефон:</label>
+                            <input id="phone" name="phone" [(ngModel)]="messageInfo.Phone" 
+                            #phone="ngModel" required pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$">
+                        </div>
+                        <div class=errosRow *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                            <div *ngIf="phone.errors.pattern">
+                                Некорректный телефон
+                            </div>
+                            <div *ngIf="phone.errors.required">
+                                Введите телефон
+                            </div>
+                        </div>
+                        <div class=row>
+                            <label for="selectTopic">Тема:</label>
+                            <select  name="selectTopic" [(ngModel)]="messageInfo.TopicId" #topicId="ngModel" required>  
+                                <option *ngFor="let top of topics" [ngValue]="top.id"  >
+                                    {{top.name}}
+                                </option> 
+                            </select>
+                        </div>
+                        <div class=errosRow *ngIf="topicId.invalid && (topicId.dirty || topicId.touched)">
+                            <div *ngIf="topicId.errors.required">
+                                Выберите тему
+                            </div>
+                        </div>
+                        <div class=row>
+                            <label for="message"> Ваше сообщение:</label>
+                            <textarea name="message" rows="5" [(ngModel)]="messageInfo.Text" 
+                            #message="ngModel" required >
+                            </textarea>
+                        </div>
+                        <div class=errosRow *ngIf="message.invalid && (message.dirty || message.touched)">
+                            <div *ngIf="message.errors.required">
+                                Сообщение не должно быть пустым
+                            </div>
+                        </div>
+                        <div class=row>
+                            <div class="divCaptcha">
+                                <re-captcha name="captcha" [(ngModel)]="captchaField" 
+                                #captcha=ngModel required></re-captcha>
+                            </div>
+                        </div>
 
-
-
-    <form name="myform" #myForm="ngForm" >
-            <div id="externalLayout">
-                <canvas id="canvas" #canvasEl ></canvas>
-                <div id="mainLayout">
-                    <div class=row>
-                        <label for="name">Ваше имя:</label>
-                        <input id="name" name="name" [(ngModel)]="messageInfo.Name" #name="ngModel" required>
-                    </div>
-                    <div class=errosRow *ngIf="name.invalid && (name.dirty || name.touched)  ">
-                        <div *ngIf="name.errors.required">
-                            Введите имя
-                        </div>
-                    </div>
-                    <div class=row>
-                        <label for="email" >Ваш Email:</label>
-                        <input id="email"  name="email" type="email" [(ngModel)]="messageInfo.Email" 
-                        #email="ngModel"
-                        required pattern="[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}" >
-                    </div>
-                    <div class=errosRow *ngIf="email.invalid && (email.dirty || email.touched)">
-                        <div *ngIf="email.errors.pattern">
-                            Некорректный email
-                        </div>
-                        <div *ngIf="email.errors.required">
-                            Введите email
-                        </div>
-                    </div>
-                    <div class=row>
-                        <label for="phone" >Ваш телефон:</label>
-                        <input id="phone" name="phone" [(ngModel)]="messageInfo.Phone" 
-                        #phone="ngModel" required pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$">
-                    </div>
-                    <div class=errosRow *ngIf="phone.invalid && (phone.dirty || phone.touched)">
-                        <div *ngIf="phone.errors.pattern">
-                            Некорректный телефон
-                        </div>
-                        <div *ngIf="phone.errors.required">
-                            Введите телефон
-                        </div>
-                    </div>
-                    <div class=row>
-                        <label for="selectTopic">Тема:</label>
-                        <select  name="selectTopic" [(ngModel)]="messageInfo.TopicId" #topicId="ngModel" required>  
-                            <option *ngFor="let top of topics" [ngValue]="top.id"  >
-                                {{top.name}}
-                            </option> 
-                        </select>
-                    </div>
-                    <div class=errosRow *ngIf="topicId.invalid && (topicId.dirty || topicId.touched)">
-                        <div *ngIf="topicId.errors.required">
-                            Выберите тему
-                        </div>
-                    </div>
-                    <div class=row>
-                        <label for="message">Ваше сообщение:</label>
-                        <textarea name="message" rows="5" [(ngModel)]="messageInfo.Text" 
-                        #message="ngModel" required >
-                        </textarea>
-                    </div>
-                    <div class=errosRow *ngIf="message.invalid && (message.dirty || message.touched)">
-                        <div *ngIf="message.errors.required">
-                            Сообщение не должно быть пустым
-                        </div>
-                    </div>
-                    <div class=row>
-                        <div class="divCaptcha">
-                            <re-captcha name="captcha" [(ngModel)]="captchaField" 
-                            #captcha=ngModel required></re-captcha>
-                        </div>
-                    </div>
-
-                    <div class=row>
-                        <button id="submitButton" type="submit" 
-                         [disabled]="!myForm.valid" (click)="addMessage()">
-                            Отправить письмо!
-                        </button>
-                    </div>
-
-                    
-                </div><!--mainLayout-->
-            </div><!--externalLayout-->
-
-            
-    </form>
-</body>
-
+                        <div class=row>
+                            <button id="submitButton" type="submit" 
+                            [disabled]="!myForm.valid" (click)="addMessage()">
+                                Отправить письмо!
+                            </button>
+                        </div>         
+                    </div><!--mainLayout-->
+                </div><!--externalLayout-->
+        </form>
+        <div class="receiveMessage" *ngIf="isSended">
+            <label name="receivedFromDB" >
+                Сохраненное сообщение: <br>
+                id - {{receivedData.id}} <br>
+                text - {{receivedData.text}} <br>
+                
+                topicId - {{receivedData.topic.id}} 
+                    (topicName - {{receivedData.topic.name}}) <br>
+                
+                contactId - {{receivedData.contact.id}} <br>
+                (contactName - {{receivedData.contact.name}} <br> 
+                contactEmail - {{receivedData.contact.email}} <br>
+                contactPhone - {{receivedData.contact.phone}} <br>)
+            </label>
+        </div>
+    </body>
 </html>
-
-
 
 <router-outlet></router-outlet>
 
