@@ -60,7 +60,6 @@ body{
 .row input, select, textarea {
 	border-radius: 5px; /*закругляем углы для остальных браузеров*/
 	font-size: 11pt; /*размер шрифта*/
-	  
 }
 
 
@@ -83,6 +82,10 @@ body{
 	background-image:url("/assets/images/people1.jpg");
 }
 
+.row .divCaptcha, button {
+	margin-left: 155px;
+}
+
 .row input {
 	width: 340px;
 }
@@ -95,8 +98,5 @@ body{
 	width: 360px;
 }
 
-#submitButton {
-	float:right;
-	margin-right: 15px;
-}
+
 

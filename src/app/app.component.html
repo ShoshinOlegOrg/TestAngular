@@ -10,7 +10,7 @@
 
 
 
-    <form name="myform" #myForm="ngForm" novalidate>
+    <form name="myform" #myForm="ngForm" >
             <div id="externalLayout">
                 <canvas id="canvas" #canvasEl ></canvas>
                 <div id="mainLayout">
@@ -75,14 +75,24 @@
                         </div>
                     </div>
                     <div class=row>
-                        <label for="message1"></label>
+                        <div class="divCaptcha">
+                            <re-captcha name="captcha" [(ngModel)]="captchaField" 
+                            #captcha=ngModel required></re-captcha>
+                        </div>
+                    </div>
+
+                    <div class=row>
                         <button id="submitButton" type="submit" 
-                         [disabled]="myForm.invalid" (click)="addMessage()">
+                         [disabled]="!myForm.valid" (click)="addMessage()">
                             Отправить письмо!
                         </button>
                     </div>
+
+                    
                 </div><!--mainLayout-->
             </div><!--externalLayout-->
+
+            
     </form>
 </body>
 

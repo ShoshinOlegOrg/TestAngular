@@ -3,8 +3,6 @@ import { DataService } from './data.service';
 import { Topic } from './Topic';
 import { MessageInfo } from './MessageInfo';
 
-//import { ReCaptchaV3Service } from 'ng-recaptcha';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,24 +10,23 @@ import { MessageInfo } from './MessageInfo';
   providers: [DataService]
 })
 export class AppComponent implements AfterViewInit/*OnInit*/ {
-    /** Template reference to the canvas element */
-    @ViewChild('canvasEl', {static: false}) canvasEl: ElementRef;
+  title = 'Обратная связь';
+
+  /** Template reference to the canvas element */
+  @ViewChild('canvasEl', {static: false}) canvasEl: ElementRef;
+  /** Canvas 2d context */
+  private context: CanvasRenderingContext2D;
   
-    /** Canvas 2d context */
-    private context: CanvasRenderingContext2D;
-  title = 'Project-Angular';
   messageInfo: MessageInfo = new MessageInfo();
 
   topics: Topic[];
   selectedTopic: Topic = new Topic(-1, "");
 
+  captchaField: string;
+
   constructor(
-    //private recaptchaV3Service: ReCaptchaV3Service,
     private dataService: DataService) {}
 
-
-
-  
   //ngOnInit() {
   ngAfterViewInit() {
     this.loadTopics(); // загрузка тем сообщений
